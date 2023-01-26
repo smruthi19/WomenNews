@@ -532,6 +532,7 @@ def getSportsData(request):
     # print(dataUpdated2["articles"])
     # get the most recent 10 values (last 10 values in database)
     recentValues = news.find().sort('$natural',-1).limit(10)
+    # get the most recent 10 values
     # db.foo.find().sort({$natural:1});
 
     print(recentValues)
