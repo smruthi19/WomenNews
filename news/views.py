@@ -538,7 +538,7 @@ def getSportsData(request):
     for position in range(10):
         print(recentValues[position])
 
-    print("recent")
+    print("recent2")
 
     # print(result2["title"])
 
@@ -562,4 +562,4 @@ def getSportsData(request):
     ## 3. Have a separate python file in this project for cleaning the database (removes the oldest 5 entries)
     ## 4. Cron job to run on clean.py (once in 2 weeks?)
 
-    # Is it better to create >1 collections (tables) within the one database for each category of news 
+    # Is it better to create >1 collections (tables) within the one database for each category of news
