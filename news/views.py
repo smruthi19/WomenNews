@@ -67,93 +67,110 @@ def getData(request):
 
 
     # accessing the API data
-    url = "https://api.newscatcherapi.com/v2/search"
+    # url = "https://api.newscatcherapi.com/v2/search"
+    #
+    # querystring = {"q":"\"Women in STEM\"","lang":"en","sort_by":"relevancy","page":"1"}
+    #
+    # headers = {
+    #     "x-api-key":"0rev02lubXPbHWkJafN4U8kk4Q1N7rmDie753ZuFDbk"
+    #     }
+    #
+    # # # retrieving the API data
+    # response = requests.request("GET", url, headers=headers, params=querystring)
+    # print("news")
+    # print(response.text)
+    # # convert response from API to json object
+    # dataUpdated = json.loads(response.text)
+    # index=0
+    # # list that stores positive news, all elements have polarity > 0.5
+    # positiveNews = []
+    # print(len(dataUpdated["articles"]))
+    # # iterate through the API data
+    # while (index <len(dataUpdated["articles"])):
+    #     #print(dataUpdated["articles"][0]["summary"])
+    #     # initialize the sentiment analyzer
+    #     analyze = SentimentIntensityAnalyzer()
+    #     # get the dictionary of polarities
+    #     polarity = analyze.polarity_scores(dataUpdated["articles"][index]["summary"])
+    #     # print(dataUpdated["articles"][index]["summary"])
+    #     # store compound polarity value for each article
+    #     compound_polarity = polarity["compound"]
+    #     print(compound_polarity)
+    #     # if compound polarity greater than 0.5, check that list does not already have this article, then append
+    #     if (compound_polarity>0.5):
+    #         # print(dataUpdated["articles"][index])
+    #         # if (dataUpdated["articles"][index]["title"] in positiveNews):
+    #         #     print("here")
+    #         positionInPostiveNews = 0
+    #         containsValue = False
+    #         # iterate through current positiveNews list to check that it does not have the current element, before adding it (checking for duplicates)
+    #         while(positionInPostiveNews<len(positiveNews)):
+    #             print("value")
+    #             print(positiveNews[positionInPostiveNews]["title"])
+    #             print(dataUpdated["articles"][index]["title"])
+    #             if ((positiveNews[positionInPostiveNews]["title"]).__eq__(dataUpdated["articles"][index]["title"])):
+    #                 containsValue = True
+    #                 print("found")
+    #             positionInPostiveNews=positionInPostiveNews+1;
+    #
+    #         # add to list if doesn't contain value
+    #         if(containsValue ==False):
+    #             positiveNews.append(dataUpdated["articles"][index])
+                  positiveNews[positionInPositiveNews+1].update(category="sports")
 
-    querystring = {"q":"\"Women in STEM\"","lang":"en","sort_by":"relevancy","page":"1"}
-
-    headers = {
-        "x-api-key":"pFmuhXwbEj6M28ka1fGxfOR_6y3PiinaoCOkh-5qfjA"
-        }
-
-    # # retrieving the API data
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    print("news")
-    print(response.text)
-    # convert response from API to json object
-    dataUpdated = json.loads(response.text)
-    index=0
-    # list that stores positive news, all elements have polarity > 0.5
-    positiveNews = []
-    print(len(dataUpdated["articles"]))
-    # iterate through the API data
-    while (index <len(dataUpdated["articles"])):
-        #print(dataUpdated["articles"][0]["summary"])
-        # initialize the sentiment analyzer
-        analyze = SentimentIntensityAnalyzer()
-        # get the dictionary of polarities
-        polarity = analyze.polarity_scores(dataUpdated["articles"][index]["summary"])
-        # print(dataUpdated["articles"][index]["summary"])
-        # store compound polarity value for each article
-        compound_polarity = polarity["compound"]
-        print(compound_polarity)
-        # if compound polarity greater than 0.5, check that list does not already have this article, then append
-        if (compound_polarity>0.5):
-            # print(dataUpdated["articles"][index])
-            # if (dataUpdated["articles"][index]["title"] in positiveNews):
-            #     print("here")
-            positionInPostiveNews = 0
-            containsValue = False
-            # iterate through current positiveNews list to check that it does not have the current element, before adding it (checking for duplicates)
-            while(positionInPostiveNews<len(positiveNews)):
-                print("value")
-                print(positiveNews[positionInPostiveNews]["title"])
-                print(dataUpdated["articles"][index]["title"])
-                if ((positiveNews[positionInPostiveNews]["title"]).__eq__(dataUpdated["articles"][index]["title"])):
-                    containsValue = True
-                    print("found")
-                positionInPostiveNews=positionInPostiveNews+1;
-
-            # add to list if doesn't contain value
-            if(containsValue ==False):
-                positiveNews.append(dataUpdated["articles"][index])
-
-            print(dataUpdated["articles"][index]["title"])
-
-            # print(compound_polarity)
-        index=index+1
-        print(index)
-
-
-    print((positiveNews))
-    print("positive")
-    print(len(positiveNews))
-
-    positiveNewsIndex=0
-    # iterate through positiveNews list before batch insert to ensure no duplicate keys
-    while positiveNewsIndex < len(positiveNews):
-        title = positiveNews[positiveNewsIndex]["title"]
-        print(title)
-        # if database already contains the title, remove this from list so that it doesn't get added again
-        if (news.find_one({"title":title})):
-            print("already there")
-            print(title)
-            positiveNews.remove(positiveNews[positiveNewsIndex])
-
-
-    print(len(positiveNews))
-    if(len(positiveNews)!=0):
-        result=news.insert_many(positiveNews)
+    #
+    #         print(dataUpdated["articles"][index]["title"])
+    #
+    #         # print(compound_polarity)
+    #     index=index+1
+    #     print(index)
+    #
+    #
+    # print((positiveNews))
+    # print("positive")
+    # print(len(positiveNews))
+    #
+    # positiveNewsIndex=0
+    # # iterate through positiveNews list before batch insert to ensure no duplicate keys
+    # while positiveNewsIndex < len(positiveNews):
+    #     title = positiveNews[positiveNewsIndex]["title"]
+    #     print(title)
+    #     # if database already contains the title, remove this from list so that it doesn't get added again
+    #     if (news.find_one({"title":title})):
+    #         print("already there")
+    #         print(title)
+    #         positiveNews.remove(positiveNews[positiveNewsIndex])
+    #
+    #
+    # print(len(positiveNews))
+    # if(len(positiveNews)!=0):
+    #     result=news.insert_many(positiveNews)
 
     # print(dataUpdated2["articles"])
     # get the most recent 10 values (last 10 values in database)
-    recentValues = news.find().sort('$natural',-1).limit(10)
+    recentValues = news.find("category:sports").sort('$natural',-1).limit(1)
     # db.foo.find().sort({$natural:1});
+    recentValues2 = news.find().sort('$natural',-1).limit(2)
+    print("start printing")
 
-    print(recentValues)
-    for position in range(10):
-        print(recentValues[position])
 
-    print("recent")
+    # for position in range(2):
+    #     print(recentValues2[position])
+    #
+    # print("recent")
+
+
+
+    recentValues2_updated = json.loads(json_util.dumps(recentValues2))
+
+    recentValues_updated = json.loads(json_util.dumps(recentValues))
+
+    # x2 = json.loads(json_util.dumps(x))
+    # recentValues_updated.append(x2)
+    # print("x added")
+    #
+    # recentValues_updated.append(recentValues2_updated)
+
 
     # print(result2["title"])
 
@@ -165,7 +182,7 @@ def getData(request):
 
     # return render(request, "index.html",  {'result' : result})
     # output the last 10 added values in database
-    return JsonResponse(json.loads(json_util.dumps(recentValues)), safe=False)
+    return JsonResponse(recentValues_updated, safe=False)
     # return render(request,"index.html", {'output':output})
 
 def getBusinessData(request):
@@ -532,14 +549,18 @@ def getSportsData(request):
     # print(dataUpdated2["articles"])
     # get the most recent 10 values (last 10 values in database)
     recentValues = news.find().sort('$natural',-1).limit(10)
+
     # get the most recent 10 values
     # db.foo.find().sort({$natural:1});
 
-    print(recentValues)
+    print(recentValues2)
     for position in range(10):
         print(recentValues[position])
 
     print("recent2")
+
+
+
 
     # print(result2["title"])
 
@@ -551,7 +572,7 @@ def getSportsData(request):
 
     # return render(request, "index.html",  {'result' : result})
     # output the last 10 added values in database
-    return JsonResponse(json.loads(json_util.dumps(recentValues)), safe=False)
+    return JsonResponse(json.loads(json_util.dumps(recentValues)), safe=False), JsonResponse(json.loads(json_util.dumps(recentValues2)), safe=False)
     # return render(request,"index.html", {'output':output})
 
 
