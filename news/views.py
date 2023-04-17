@@ -116,7 +116,7 @@ def getData(request):
     #         # add to list if doesn't contain value
     #         if(containsValue ==False):
     #             positiveNews.append(dataUpdated["articles"][index])
-                  positiveNews[positionInPositiveNews+1].update(category="sports")
+                  # positiveNews[positionInPositiveNews+1].update(category="sports")
 
     #
     #         print(dataUpdated["articles"][index]["title"])
